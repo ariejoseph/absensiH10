@@ -16,8 +16,8 @@ class CreateTableJemaat extends Migration
             $table->increments('id')->unsigned();
             $table->string('nama');
             $table->string('alamat');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             // $table->timestamps();
         });
     }
