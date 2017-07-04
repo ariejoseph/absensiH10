@@ -14,10 +14,10 @@ class CreateTableAbsensi extends Migration
     {
         Schema::create('absensi', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->integer('id_jemaat');
             $table->string('sidang');
             $table->date('tanggal');
-            $table->primary(['id', 'sidang', 'tanggal']);
-            $table->foreign('id')->references('id')->on('jemaat');
+            $table->foreign('id_jemaat')->references('id')->on('jemaat');
             // $table->timestamps();
         });
     }

@@ -11,5 +11,6 @@ class Absensi extends Model
     // disable timestamps created_at updated_at
     public $timestamps = false;
     
-    protected $fillable = ['id', 'sidang', 'tanggal'];
+    protected $fillable = ['id_jemaat', 'sidang', 'tanggal'];
+
 }

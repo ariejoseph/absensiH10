@@ -20,11 +20,11 @@ class AbsensiController extends Controller
     {
         $gereja = Jemaat::all();
         $hadir = DB::table('absensi')
-                    ->select('id')
+                    ->select('id_jemaat')
                     ->get();
         $arrHadir = [];
         for($idx = 0; $idx < count($hadir); $idx++) {
-            $arrHadir[$idx] = $hadir[$idx]->id;
+            $arrHadir[$idx] = $hadir[$idx]->id_jemaat;
         }
         $gereja = DB::table('jemaat')
                     ->select('id', 'nama')
@@ -37,7 +37,7 @@ class AbsensiController extends Controller
     {
         // $daftarHadir = Absensi::all();
         $daftarHadir = DB::table('jemaat')
-                        ->join('absensi', 'jemaat.id', '=', 'absensi.id')
+                        ->join('absensi', 'jemaat.id', '=', 'absensi.id_jemaat')
                         ->select('jemaat.id', 'jemaat.nama')
                         ->get();
         return view('sidang', compact('daftarHadir'));
@@ -112,7 +112,7 @@ class AbsensiController extends Controller
     public function absen($id, $sidang)
     {
         $seseorang = new Absensi;
-        $seseorang->id = $id;
+        $seseorang->id_jemaat = $id;
         $seseorang->sidang = $sidang;
         $seseorang->tanggal = date("Y-m-d");
         $seseorang->save();
