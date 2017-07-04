@@ -14,7 +14,7 @@ class CreateTableAbsensi extends Migration
     {
         Schema::create('absensi', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('id_jemaat');
+            $table->integer('id_jemaat')->unsigned();
             $table->string('sidang');
             $table->date('tanggal');
             $table->foreign('id_jemaat')->references('id')->on('jemaat');
