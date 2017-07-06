@@ -18,6 +18,7 @@ class CreateTableAbsensi extends Migration
             $table->string('sidang');
             $table->date('tanggal');
             $table->foreign('id_jemaat')->references('id')->on('jemaat');
+            $table->unique(['id_jemaat', 'sidang', 'tanggal']);
             // $table->timestamps();
         });
     }
