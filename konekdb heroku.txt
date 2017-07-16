@@ -1,0 +1,18 @@
+psql -h ec2-184-73-199-72.compute-1.amazonaws.com -p 5432 -U ckbnhlfjsdgwik deqrb3tdj5mevc
+pass:
+ea704d07ae0627a66e630cff90e293736eeaa3b80f64dd19d9a020b2a2ca3532
+
+insert into users (name,address,username,password) values ('Daniel','Hidup Baru','daniel','daniel');
+insert into users (name,address,username,password) values ('Dennis','Pademangan','denis','denis');
+insert into users (name,address,username,password) values ('Ko Apen','Hidup Baru','apen','apen');
+insert into users (name,address,username,password) values ('Ko Ferry','Ampera','ferry','ferry');
+insert into users (name,address,username,password) values ('Alun','Pademangan','alun','alun');
+insert into users (name,address,username,password) values ('Hendra','Ampera','hendra','hendra');
+insert into users (name,address,username,password) values ('Acen','Pademangan','acen','acen');
+insert into users (name,address,username,password) values ('Reta','Pademangan','reta','reta');
+insert into users (name,address,username,password) values ('Yana','Pademangan','yana','yana');
+insert into users (name,address,username,password) values ('Yani','Pademangan','yani','yani');
+insert into users (name,address,username,password) values ('Ko Asyok','Pademangan','asyok','asyok');
+insert into users (name,address,username,password) values ('Ko Vincent','Pademangan','vincent','vincent');
+insert into users (name,address,username,password) values ('Afung','Pademangan','afung','afung');
+insert into users (name,address,username,password) values ('Robin','Pademangan','robin','robin');

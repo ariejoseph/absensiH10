@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
-use App\Jemaat;
+use App\User;
 use App\Absensi;
 
 class AbsensiController extends Controller
@@ -18,7 +18,7 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        $gereja = Jemaat::all();
+        $gereja = User::all();
         $hadir = DB::table('absensi')
                     ->select('id_jemaat')
                     ->get();
@@ -26,8 +26,8 @@ class AbsensiController extends Controller
         for($idx = 0; $idx < count($hadir); $idx++) {
             $arrHadir[$idx] = $hadir[$idx]->id_jemaat;
         }
-        $gereja = DB::table('jemaat')
-                    ->select('id', 'nama')
+        $gereja = DB::table('users')
+                    ->select('id', 'name')
                     ->whereNotIn('id', $arrHadir)
                     ->get();
         return view('absensi', compact('gereja'));
@@ -36,9 +36,9 @@ class AbsensiController extends Controller
     public function getDaftarHadir()
     {
         // $daftarHadir = Absensi::all();
-        $daftarHadir = DB::table('jemaat')
-                        ->join('absensi', 'jemaat.id', '=', 'absensi.id_jemaat')
-                        ->select('jemaat.id', 'jemaat.nama')
+        $daftarHadir = DB::table('users')
+                        ->join('absensi', 'users.id', '=', 'absensi.id_jemaat')
+                        ->select('users.id', 'users.name')
                         ->get();
         return view('sidang', compact('daftarHadir'));
     }

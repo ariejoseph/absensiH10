@@ -13,11 +13,11 @@ class CreateTableAbsensi extends Migration
     public function up()
     {
         Schema::create('absensi', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+            $table->increments('id');
             $table->integer('id_jemaat')->unsigned();
             $table->string('sidang');
             $table->date('tanggal');
-            $table->foreign('id_jemaat')->references('id')->on('jemaat');
+            $table->foreign('id_jemaat')->references('id')->on('users');
             $table->unique(['id_jemaat', 'sidang', 'tanggal']);
             // $table->timestamps();
         });

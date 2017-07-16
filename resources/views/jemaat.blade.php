@@ -6,7 +6,7 @@
 @if(count($gereja))
 	<ul>
 		@foreach($gereja as $saudara)
-			<li>{{ $saudara->nama }}</li>
+			<li>{{ $saudara->name }}</li>
 		@endforeach
 	</ul>
 @else

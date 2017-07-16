@@ -15,8 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/jemaat', 'JemaatController@index');
+// Route::get('/jemaat', 'JemaatController@index');
 
-Route::get('/absensi', 'AbsensiController@index');
-Route::get('/absensi/{id}/{sidang}', 'AbsensiController@absen');
-Route::get('/sidang', 'AbsensiController@getDaftarHadir');
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/jemaat', 'JemaatController@index');
+	Route::get('/absensi', 'AbsensiController@index');
+	Route::get('/absensi/{id}/{sidang}', 'AbsensiController@absen');
+	Route::get('/sidang', 'AbsensiController@getDaftarHadir');
+});
+
+// Route::get('/absensi', 'AbsensiController@index');
+// Route::get('/absensi/{id}/{sidang}', 'AbsensiController@absen');
+// Route::get('/sidang', 'AbsensiController@getDaftarHadir');
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

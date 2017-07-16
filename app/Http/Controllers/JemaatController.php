@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Jemaat;
+use App\User;
 
 class JemaatController extends Controller
 {
@@ -16,7 +16,7 @@ class JemaatController extends Controller
      */
     public function index()
     {
-        $gereja = Jemaat::all();
+        $gereja = User::all();
         return view('jemaat', compact('gereja'));
     }
 
