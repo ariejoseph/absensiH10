@@ -16,7 +16,7 @@ class JemaatController extends Controller
      */
     public function index()
     {
-        $gereja = User::all()->orderBy('name')->get();
+        $gereja = User::orderBy('name')->get();
         return view('jemaat', compact('gereja'));
     }
 
