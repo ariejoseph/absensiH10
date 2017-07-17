@@ -29,6 +29,7 @@ class AbsensiController extends Controller
         $gereja = DB::table('users')
                     ->select('id', 'name')
                     ->whereNotIn('id', $arrHadir)
+                    ->orderBy('name')
                     ->get();
         return view('absensi', compact('gereja'));
     }
@@ -39,6 +40,7 @@ class AbsensiController extends Controller
         $daftarHadir = DB::table('users')
                         ->join('absensi', 'users.id', '=', 'absensi.id_jemaat')
                         ->select('users.id', 'users.name')
+                        ->orderBy('name')
                         ->get();
         return view('sidang', compact('daftarHadir'));
     }
