@@ -1,5 +1,4 @@
 psql -h ec2-184-73-199-72.compute-1.amazonaws.com -p 5432 -U ckbnhlfjsdgwik deqrb3tdj5mevc
-pass:
 ea704d07ae0627a66e630cff90e293736eeaa3b80f64dd19d9a020b2a2ca3532
 
 insert into users (name,address,username,password,gender) values ('Daniel','Hidup Baru','daniel','daniel10','Laki-laki');

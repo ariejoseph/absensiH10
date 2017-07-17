@@ -71,7 +71,7 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
             'username' => $data['username'],
             'gender' => $data['gender'],
-            'place_of_birth' => $data['place_of_birth'],
+            'place_of_birth' => empty($data['place_of_birth'])? NULL : $data['place_of_birth'],
             'date_of_birth' => $data['date_of_birth'],
             'address' => $data['address'],
             'phone' => $data['phone'],
