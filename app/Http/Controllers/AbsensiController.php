@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\User;
 use App\Absensi;
+use App\Sidang;
 
 class AbsensiController extends Controller
 {
@@ -16,33 +17,45 @@ class AbsensiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($sidang)
     {
+        $today = date('Y-m-d');
         $gereja = User::all();
         $hadir = DB::table('absensi')
                     ->select('id_jemaat')
-                    ->get();
+                    ->where([
+                        ['id_sidang', '=', $sidang],
+                        ['tanggal', '=', $today],
+                    ])->get();
         $arrHadir = [];
         for($idx = 0; $idx < count($hadir); $idx++) {
             $arrHadir[$idx] = $hadir[$idx]->id_jemaat;
         }
+
         $gereja = DB::table('users')
                     ->select('id', 'name')
                     ->whereNotIn('id', $arrHadir)
                     ->orderBy('name')
                     ->get();
-        return view('absensi', compact('gereja'));
+        return view('absensi', compact('gereja', 'sidang'));
     }
 
-    public function getDaftarHadir()
+    public function getDaftarHadir(Request $request)
     {
-        // $daftarHadir = Absensi::all();
+        // $input = $request->all();
+        $sidang = $request->input('sidang');
+        $namaSidang = Sidang::find($sidang)->nama;
+        $tanggal = $request->input('tanggal');
         $daftarHadir = DB::table('users')
                         ->join('absensi', 'users.id', '=', 'absensi.id_jemaat')
                         ->select('users.id', 'users.name')
+                        ->where([
+                            ['absensi.id_sidang', '=', $sidang],
+                            ['absensi.tanggal', '=', $tanggal],
+                        ])
                         ->orderBy('name')
                         ->get();
-        return view('sidang', compact('daftarHadir'));
+        return view('hadir', compact('daftarHadir', 'namaSidang', 'tanggal'));
     }
 
     /**
@@ -111,14 +124,16 @@ class AbsensiController extends Controller
         //
     }
 
-    public function absen($id, $sidang)
+    public function absen($sidang, $jemaat)
     {
         $seseorang = new Absensi;
-        $seseorang->id_jemaat = $id;
-        $seseorang->sidang = $sidang;
+        $seseorang->id_jemaat = $jemaat;
+        $seseorang->id_sidang = $sidang;
         $seseorang->tanggal = date("Y-m-d");
         $seseorang->save();
-        return redirect('/absensi');
+        return redirect()->action(
+            'AbsensiController@index', [$sidang]
+        );
         // return $this->getDaftarHadir();
     }
 }

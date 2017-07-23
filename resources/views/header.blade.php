@@ -27,7 +27,7 @@
       <ul class="nav navbar-nav">
         <li class="{{ Request::segment(1) === 'jemaat' ? 'active' : null }}"><a href="/jemaat">Jemaat</a></li>
         <li class="{{ Request::segment(1) === 'absensi' ? 'active' : null }}"><a href="/absensi">Absen</a></li>
-        <li class="{{ Request::segment(1) === 'sidang' ? 'active' : null }}"><a href="/sidang">Sidang</a></li>
+        <li class="{{ Request::segment(1) === 'hadir' ? 'active' : null }}"><a href="/hadir">Sidang</a></li>
       </ul>
       <!-- Right Side Of Navbar -->
       <ul class="nav navbar-nav navbar-right">

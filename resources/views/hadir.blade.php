@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2>Daftar hadir SPR:</h2>
+<h2>Daftar Hadir {{ $namaSidang }} tanggal {{ $tanggal }}:</h2>
 @if(count($daftarHadir))
 	<ul>
 		@foreach($daftarHadir as $saudara)

@@ -6,7 +6,7 @@
 @if(count($gereja))
 	<ul>
 		@foreach($gereja as $saudara)
-			<li>{{ $saudara->name }} <a href="{{ url('absensi', [$saudara->id,'SPR']) }}">HADIR</a></li>
+			<li>{{ $saudara->name }} <a href="{{ url('absensi', [$sidang,$saudara->id]) }}">HADIR</a></li>
 		@endforeach
 	</ul>
 @else
