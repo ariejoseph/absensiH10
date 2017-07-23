@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2>Sidang Pemecahan Roti</h2>
+<h2>{{ $namaSidang }} tanggal {{ $today }}</h2>
 @if(count($gereja))
 	<ul>
 		@foreach($gereja as $saudara)

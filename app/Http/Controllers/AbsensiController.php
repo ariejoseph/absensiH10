@@ -37,7 +37,9 @@ class AbsensiController extends Controller
                     ->whereNotIn('id', $arrHadir)
                     ->orderBy('name')
                     ->get();
-        return view('absensi', compact('gereja', 'sidang'));
+
+        $namaSidang = Sidang::find($sidang)->nama;
+        return view('absensi', compact('gereja', 'sidang', 'namaSidang', 'today'));
     }
 
     public function getDaftarHadir(Request $request)
