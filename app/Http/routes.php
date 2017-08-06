@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/jemaat', 'JemaatController@index');
+	Route::get('/jemaat/{id}', 'JemaatController@show');
 
 	Route::get('/absensi', 'SidangController@index')->name('absensi');
 	// Route::get('/absensi/{id}/{sidang}', 'AbsensiController@absen');

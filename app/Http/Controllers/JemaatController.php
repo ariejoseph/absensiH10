@@ -49,7 +49,8 @@ class JemaatController extends Controller
      */
     public function show($id)
     {
-        //
+        $gereja = User::find($id);
+        return view('infoJemaat', compact('gereja'));
     }
 
     /**
