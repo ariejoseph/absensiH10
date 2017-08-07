@@ -9,6 +9,8 @@
 			<li>{{ $saudara->name }}</li>
 		@endforeach
 	</ul>
+	<br>
+	<p><h4>Jumlah hadir: {{ count($daftarHadir) }}</h4></p>
 @else
 <p>tidak ada.</p>
 @endif
