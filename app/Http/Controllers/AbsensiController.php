@@ -57,7 +57,18 @@ class AbsensiController extends Controller
                         ])
                         ->orderBy('name')
                         ->get();
-        return view('hadir', compact('daftarHadir', 'namaSidang', 'tanggal'));
+
+        $arrHadir = [];
+        for($idx = 0; $idx < count($daftarHadir); $idx++) {
+            $arrHadir[$idx] = $daftarHadir[$idx]->id;
+        }
+
+        $yangAbsen = DB::table('users')
+                    ->select('id', 'name')
+                    ->whereNotIn('id', $arrHadir)
+                    ->orderBy('name')
+                    ->get();
+        return view('hadir', compact('daftarHadir', 'namaSidang', 'tanggal', 'yangAbsen'));
     }
 
     /**
