@@ -4,11 +4,14 @@
 
 <h2>{{ $namaSidang }} tanggal {{ $today }}</h2>
 @if(count($gereja))
-	<ul>
+	<table class="table table-striped">
 		@foreach($gereja as $saudara)
-			<li>{{ $saudara->name }} <a href="{{ url('absensi', [$sidang,$saudara->id]) }}">HADIR</a></li>
+			<tr>
+				<td style="vertical-align: middle;">{{ $saudara->name }}</td>
+				<td><a href="{{ url('absensi', [$sidang,$saudara->id]) }} " class="btn btn-primary pull-right">Hadir</a></td>
+			</tr>
 		@endforeach
-	</ul>
+	</table>
 @else
 <p>tidak ada.</p>
 @endif
