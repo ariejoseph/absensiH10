@@ -4,6 +4,11 @@
 
 <h2>{{ $namaSidang }} tanggal {{ $today }}</h2>
 @if(count($gereja))
+	<div class="form-group row">
+		<div class="col-md-4 col-md-offset-8">
+			<input type="text" class="form-control" id="search-input" onkeyup="searchup()" onkeydown="searchdown()" placeholder="Search">
+		</div>
+	</div>
 	<table class="table table-striped">
 		@foreach($gereja as $saudara)
 			<tr>

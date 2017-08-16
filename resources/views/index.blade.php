@@ -30,5 +30,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+<script type="text/javascript">
+	var timer;
+	function searchup() {
+		timer = setTimeout(function() {
+			var keywords = $('#search-input').val().toLowerCase();
+			if (keywords.length > 0) {
+				$('tr').each(function() {
+					var name = $('td', this).html().toLowerCase();
+					if(name.search(keywords) < 0) {
+						$('td', this).hide();
+					} else {
+						$('td', this).show();
+					}
+				});
+			} else {
+				$('td').show();
+			}
+		}, 500);
+	}
+
+	function searchdown() {
+		clearTimeout(timer);
+	}
+</script>
 </body>
 </html>
