@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2>{{ $namaSidang }} tanggal {{ $today }}</h2>
+<h2>{{ $namaSidang }} ({{ $today }})</h2>
 @if(count($gereja))
 	<div class="form-group row">
 		<div class="col-md-4 col-md-offset-8">
