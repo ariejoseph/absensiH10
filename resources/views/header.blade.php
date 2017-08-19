@@ -9,11 +9,13 @@
             <a class="navbar-brand" href="/">Hall X</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="{{ Request::segment(1) === 'jemaat' ? 'active' : null }}"><a href="/jemaat">Jemaat</a></li>
-                <li class="{{ Request::segment(1) === 'absensi' ? 'active' : null }}"><a href="/absensi">Absen</a></li>
-                <li class="{{ Request::segment(1) === 'hadir' ? 'active' : null }}"><a href="/hadir">Sidang</a></li>
-            </ul>
+            @if (Auth::check())
+                <ul class="nav navbar-nav">
+                    <li class="{{ Request::segment(1) === 'jemaat' ? 'active' : null }}"><a href="/jemaat">Jemaat</a></li>
+                    <li class="{{ Request::segment(1) === 'absensi' ? 'active' : null }}"><a href="/absensi">Absen</a></li>
+                    <li class="{{ Request::segment(1) === 'hadir' ? 'active' : null }}"><a href="/hadir">Sidang</a></li>
+                </ul>
+            @endif
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
