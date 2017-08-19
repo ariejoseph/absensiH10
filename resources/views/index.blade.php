@@ -47,7 +47,7 @@
 			} else {
 				$('td').show();
 			}
-		}, 500);
+		}, 250);
 	}
 
 	function searchdown() {
