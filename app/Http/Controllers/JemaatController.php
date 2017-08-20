@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Requests;
 use App\User;
+use Validator;
 
 class JemaatController extends Controller
 {
@@ -17,7 +21,7 @@ class JemaatController extends Controller
     public function index()
     {
         $gereja = User::orderBy('name')->get();
-        return view('jemaat', compact('gereja'));
+        return view('jemaat.index', compact('gereja'));
     }
 
     /**
@@ -27,7 +31,7 @@ class JemaatController extends Controller
      */
     public function create()
     {
-        //
+        return view('jemaat.create');
     }
 
     /**
@@ -38,7 +42,36 @@ class JemaatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'name' => 'required|max:255',
+            'email' => 'email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'username' => 'required|unique:users',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::to('jemaat/create')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            // store
+            $newJemaat = new User;
+            $newJemaat->name = $input['name'];
+            $newJemaat->email = $input['email'];
+            $newJemaat->password = bcrypt($input['password']);
+            $newJemaat->username = $input['username'];
+            $newJemaat->gender = $input['gender'];
+            $newJemaat->place_of_birth = $input['place_of_birth'];
+            $newJemaat->date_of_birth = date("Y-m-d", strtotime($input['date_of_birth']));
+            $newJemaat->address = $input['address'];
+            $newJemaat->phone = $input['phone'];
+            $newJemaat->save();
+
+            // redirect
+            Session::flash('message', 'Successfully created jemaat!');
+            return Redirect::to('jemaat');
+        }
     }
 
     /**
@@ -50,7 +83,7 @@ class JemaatController extends Controller
     public function show($id)
     {
         $gereja = User::find($id);
-        return view('infoJemaat', compact('gereja'));
+        return view('jemaat.show', compact('gereja'));
     }
 
     /**
@@ -61,7 +94,8 @@ class JemaatController extends Controller
      */
     public function edit($id)
     {
-        //
+        $gereja = User::find($id);
+        return view('jemaat.edit', compact('gereja'));
     }
 
     /**
@@ -73,7 +107,34 @@ class JemaatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'name' => 'required|max:255',
+            'email' => 'email|max:255|unique:users',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::to('jemaat/' . $id . '/edit')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            // store
+            $gereja = User::find($id);
+            $gereja->name = $input['name'];
+            $gereja->email = $input['email'];
+            // $gereja->password = bcrypt($input['password']);
+            // $gereja->username = $input['username'];
+            // $gereja->gender = $input['gender'];
+            // $gereja->place_of_birth = $input['place_of_birth'];
+            // $gereja->date_of_birth = date("Y-m-d", strtotime($input['date_of_birth']));
+            $gereja->address = $input['address'];
+            $gereja->phone = $input['phone'];
+            $gereja->save();
+
+            // redirect
+            Session::flash('message', 'Successfully created jemaat!');
+            return Redirect::to('jemaat');
+        }
     }
 
     /**
@@ -84,6 +145,12 @@ class JemaatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // delete
+        $gereja = User::find($id);
+        $gereja->delete();
+
+        // redirect
+        Session::flash('message', 'Successfully deleted jemaat!');
+        return Redirect::to('jemaat');
     }
 }

@@ -15,9 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/jemaat', 'JemaatController@index');
-
 Route::group(['middleware' => 'auth'], function () {
+	Route::resource('jemaat', 'JemaatController');
 	Route::get('/jemaat', 'JemaatController@index');
 	Route::get('/jemaat/{id}', 'JemaatController@show');
 

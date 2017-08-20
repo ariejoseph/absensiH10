@@ -40,7 +40,7 @@ class AbsensiController extends Controller
 
         $namaSidang = Sidang::find($sidang)->nama;
         $today = date('F j, Y');
-        return view('absensi', compact('gereja', 'sidang', 'namaSidang', 'today'));
+        return view('absensi.index', compact('gereja', 'sidang', 'namaSidang', 'today'));
     }
 
     public function getDaftarHadir(Request $request)
@@ -70,7 +70,7 @@ class AbsensiController extends Controller
                     ->orderBy('name')
                     ->get();
         $tanggal = date('F j, Y', strtotime($tanggal));
-        return view('hadir', compact('daftarHadir', 'namaSidang', 'tanggal', 'yangAbsen'));
+        return view('absensi.hadir', compact('daftarHadir', 'namaSidang', 'tanggal', 'yangAbsen'));
     }
 
     /**

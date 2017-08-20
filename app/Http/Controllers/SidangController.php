@@ -20,9 +20,9 @@ class SidangController extends Controller
         $daftarSidang = Sidang::all();
         $routeName = Route::currentRouteName();
         if($routeName == 'absensi') {
-			return view('absensiSidang', compact('daftarSidang'));
+			return view('sidang.absensiSidang', compact('daftarSidang'));
         } elseif ($routeName == 'hadir') {
-        	return view('daftarSidang', compact('daftarSidang'));
+        	return view('sidang.daftarSidang', compact('daftarSidang'));
     	}
     }
 
