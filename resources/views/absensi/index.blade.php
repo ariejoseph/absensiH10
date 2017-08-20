@@ -19,7 +19,7 @@
 			@foreach($gereja as $saudara)
 				<tr>
 					<td style="width: 29px; vertical-align: middle;"><input type="checkbox" name="check_list_jemaat[]" value="{{ $saudara->id }}"></td>
-					<td style="vertical-align: middle;">{{ $saudara->name }}</td>
+					<td id="name" style="vertical-align: middle;">{{ $saudara->name }}</td>
 					<td><a href="{{ url('absensi', [$sidang,$saudara->id]) }} " class="btn btn-primary pull-right">Hadir</a></td>
 				</tr>
 			@endforeach

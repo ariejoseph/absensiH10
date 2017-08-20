@@ -37,7 +37,7 @@
 			var keywords = $('#search-input').val().toLowerCase();
 			if (keywords.length > 0) {
 				$('tr').each(function() {
-					var name = $('td', this).html().toLowerCase();
+					var name = $('#name', this).html().toLowerCase();
 					if(name.search(keywords) < 0) {
 						$('td', this).hide();
 					} else {
