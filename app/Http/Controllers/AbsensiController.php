@@ -151,4 +151,24 @@ class AbsensiController extends Controller
         );
         // return $this->getDaftarHadir();
     }
+
+    public function absen2(Request $request)
+    {
+        $input = $request->all();
+        $sidang = $input['sidang'];
+        if(!empty($input['check_list_jemaat'])) {
+            $listJemaat = $input['check_list_jemaat'];
+            foreach($listJemaat as $jemaat) {
+                $seseorang = new Absensi;
+                $seseorang->id_jemaat = $jemaat;
+                $seseorang->id_sidang = $sidang;
+                $seseorang->tanggal = date("Y-m-d");
+                $seseorang->save();
+            }
+        }
+        return redirect()->action(
+            'AbsensiController@index', [$sidang]
+        );
+        // return $this->getDaftarHadir();
+    }
 }

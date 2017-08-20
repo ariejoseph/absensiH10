@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/absensi', 'SidangController@index')->name('absensi');
 	Route::get('/absensi/{sidang}', 'AbsensiController@index');
 	Route::get('/absensi/{sidang}/{id}', 'AbsensiController@absen');
+	Route::post('/absensi2/', 'AbsensiController@absen2');
 
 	Route::get('/hadir', 'SidangController@index')->name('hadir');
 	Route::post('/daftarHadir', 'AbsensiController@getDaftarHadir');
