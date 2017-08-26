@@ -53,6 +53,15 @@
 	function searchdown() {
 		clearTimeout(timer);
 	}
+
+	$('input[name="check_list_jemaat[]"]').click(function() {
+		var count = $("[type='checkbox']:checked").length;
+		if(count > 0) {
+			$('#absen').attr('disabled',false);
+		} else {
+			$('#absen').attr('disabled',true);
+		}
+	});
 </script>
 </body>
 </html>
