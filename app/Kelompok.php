@@ -4,13 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sidang extends Model
+class Kelompok extends Model
 {
-    protected $table = 'sidang';
+    protected $table = 'kelompok';
 
     // disable timestamps created_at updated_at
     public $timestamps = false;
     
-    protected $fillable = ['nama', 'sesi', 'start', 'end', 'lokasi', 'kelompok'];
-
+    protected $fillable = ['id_koordinator', 'id_asisten', 'id_jemaat', 'id_sidang'];
 }
