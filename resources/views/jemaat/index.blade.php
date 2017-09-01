@@ -5,9 +5,25 @@
 <h2>List jemaat:</h2>
 <a class="btn btn-small btn-primary pull-right" href="{{ url('jemaat/create') }}"><i class="fa fa-plus"></i> Add user</a>
 @if(count($gereja))
-	<ul>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nama</th>
+				<th>Panggilan</th>
+				<th>JK</th>
+				<th>Alamat</th>
+				<th>HP</th>
+			</tr>
+		</thead>
+		<tbody>
 		@foreach($gereja as $saudara)
-			<li><a href="{{ url('jemaat', [$saudara->id]) }}">{{ $saudara->name }}</a></li>
+			<tr class="clickable-row" data-href="{{ url('jemaat', [$saudara->id]) }}" style="cursor: pointer;">
+				<td>{{ $saudara->name }}</td>
+				<td>{{ $saudara->nickname }}</td>
+				<td>{{ $saudara->gender }}</td>
+				<td>{{ $saudara->address }}</td>
+				<td>{{ $saudara->phone }}</td>
+			</tr>
 			<!-- <a class="btn btn-small btn-info" href="{{ url('jemaat/'. $saudara->id .'/edit') }}"><i class="fa fa-pencil-square-o"></i> Edit</a></li>
 			<form method="POST" action="{{ url('jemaat', [$saudara->id]) }}">
 				{{ csrf_field() }}
@@ -17,7 +33,8 @@
 				</button>
 			</form> -->
 		@endforeach
-	</ul>
+		</tbody>
+	</table>
 @else
 <p>tidak ada.</p>
 @endif

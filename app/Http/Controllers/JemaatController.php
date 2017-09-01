@@ -46,8 +46,6 @@ class JemaatController extends Controller
         $validator = Validator::make($input, [
             'name' => 'required|max:255',
             'email' => 'email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'username' => 'required|unique:users',
         ]);
 
         if ($validator->fails()) {
@@ -58,9 +56,13 @@ class JemaatController extends Controller
             // store
             $newJemaat = new User;
             $newJemaat->name = $input['name'];
+            $newJemaat->nickname = $input['nickname'];
             $newJemaat->email = $input['email'];
-            $newJemaat->password = bcrypt($input['password']);
             $newJemaat->username = $input['username'];
+            $newJemaat->password = bcrypt($input['password']);
+            $newJemaat->role = $input['role'];
+            $newJemaat->status = $input['status'];
+            $newJemaat->hall = $input['hall'];
             $newJemaat->gender = $input['gender'];
             $newJemaat->place_of_birth = $input['place_of_birth'];
             $newJemaat->date_of_birth = date("Y-m-d", strtotime($input['date_of_birth']));
@@ -122,8 +124,11 @@ class JemaatController extends Controller
             $gereja = User::find($id);
             $gereja->name = $input['name'];
             $gereja->email = $input['email'];
-            // $gereja->password = bcrypt($input['password']);
+            $gereja->role = $input['role'];
+            $gereja->status = $input['status'];
+            $gereja->hall = $input['hall'];
             // $gereja->username = $input['username'];
+            // $gereja->password = bcrypt($input['password']);
             // $gereja->gender = $input['gender'];
             // $gereja->place_of_birth = $input['place_of_birth'];
             // $gereja->date_of_birth = date("Y-m-d", strtotime($input['date_of_birth']));

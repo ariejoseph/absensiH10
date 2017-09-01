@@ -17,6 +17,10 @@
 						<table class="table table-user-information">
 							<tbody>
 								<tr>
+									<td>Panggilan</td>
+									<td>{{ $gereja->nickname }}</td>
+								</tr>
+								<tr>
 									<td>Jenis Kelamin</td>
 									<td>{{ $gereja->gender }}</td>
 								</tr>
@@ -31,6 +35,18 @@
 								<tr>
 									<td>No. Telp</td>
 									<td>{{ $gereja->phone }}</td>
+								</tr>
+								<tr>
+									<td>Peran</td>
+									<td>{{ $gereja->role }}</td>
+								</tr>
+								<tr>
+									<td>Status</td>
+									<td>{{ $gereja->status }}</td>
+								</tr>
+								<tr>
+									<td>Hall</td>
+									<td>{{ $gereja->hall }}</td>
 								</tr>
 							</tbody>
 						</table>

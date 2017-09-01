@@ -62,6 +62,10 @@
 			$('#absen').attr('disabled',true);
 		}
 	});
+
+	$(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
 </script>
 </body>
 </html>
