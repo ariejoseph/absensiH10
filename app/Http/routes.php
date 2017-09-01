@@ -20,6 +20,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/jemaat', 'JemaatController@index');
 	Route::get('/jemaat/{id}', 'JemaatController@show');
 
+	Route::resource('kelompok', 'KelompokController');
+
+	Route::resource('sidang', 'SidangController');
+	Route::get('/sidang', 'SidangController@index')->name('sidang');
+
 	Route::get('/absensi', 'SidangController@index')->name('absensi');
 	Route::get('/absensi/{sidang}', 'AbsensiController@index');
 	Route::get('/absensi/{sidang}/{id}', 'AbsensiController@absen');

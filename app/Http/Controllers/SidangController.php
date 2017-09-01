@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Requests;
 use App\Sidang;
+use Validator;
 
 class SidangController extends Controller
 {
@@ -23,7 +24,9 @@ class SidangController extends Controller
 			return view('sidang.absensiSidang', compact('daftarSidang'));
         } elseif ($routeName == 'hadir') {
         	return view('sidang.daftarSidang', compact('daftarSidang'));
-    	}
+    	} else { // routeName == 'sidang'
+            return view('sidang.index', compact('daftarSidang'));
+        }
     }
 
     /**
@@ -33,7 +36,7 @@ class SidangController extends Controller
      */
     public function create()
     {
-        //
+        return view('sidang.create');
     }
 
     /**
@@ -44,7 +47,21 @@ class SidangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'sidang' => 'required|max:255',
+        ]);
+
+        $sidang = new Sidang;
+        $sidang->nama = $input['nama'];
+        $sidang->sesi = $input['sesi'];
+        $sidang->start = $input['start'];
+        $sidang->end = $input['end'];
+        $sidang->lokasi = $input['lokasi'];
+        $sidang->kelompok = $input['kelompok'];
+        $sidang->save();
+
+        return redirect()->route('sidang');
     }
 
     /**
@@ -55,7 +72,8 @@ class SidangController extends Controller
      */
     public function show($id)
     {
-        //
+        // $sidang = Sidang::find($id);
+        // return view('sidang.show', compact('sidang'));
     }
 
     /**
@@ -66,7 +84,8 @@ class SidangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sidang = Sidang::find($id);
+        return view('sidang.edit', compact('sidang'));
     }
 
     /**

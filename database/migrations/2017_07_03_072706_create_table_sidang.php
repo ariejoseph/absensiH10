@@ -19,7 +19,7 @@ class CreateTableSidang extends Migration
             $table->time('start');
             $table->time('end');
             $table->string('lokasi');
-            $table->string('kelompok');
+            $table->string('kelompok')->nullable();
             // $table->timestamps();
         });
     }
