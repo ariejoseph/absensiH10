@@ -21,6 +21,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/jemaat/{id}', 'JemaatController@show');
 
 	Route::resource('kelompok', 'KelompokController');
+	Route::get('/anggota/create/{id_kelompok}', 'KelompokController@newMember');
+	Route::post('/anggota/daftar/{id_kelompok}', 'KelompokController@daftar');
+	Route::post('/anggota/hapus/{id_kelompok}/{id_jemaat}', 'KelompokController@hapus');
 
 	Route::resource('sidang', 'SidangController');
 	Route::get('/sidang', 'SidangController@index')->name('sidang');

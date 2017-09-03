@@ -16,12 +16,13 @@ class CreateTableKelompok extends Migration
             $table->increments('id');
             $table->integer('id_koordinator')->unsigned();
             $table->integer('id_asisten')->unsigned();
-            $table->integer('id_jemaat')->unsigned();
+            // $table->integer('id_jemaat')->unsigned();
             $table->integer('id_sidang')->unsigned()->nullable();
             $table->foreign('id_koordinator')->references('id')->on('users');
             $table->foreign('id_asisten')->references('id')->on('users');
-            $table->foreign('id_jemaat')->references('id')->on('users');
+            // $table->foreign('id_jemaat')->references('id')->on('users');
             $table->foreign('id_sidang')->references('id')->on('sidang');
+            $table->unique(['id_koordinator', 'id_asisten']);
             // $table->timestamps();
         });
     }

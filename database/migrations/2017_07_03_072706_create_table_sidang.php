@@ -18,6 +18,7 @@ class CreateTableSidang extends Migration
             $table->string('sesi');
             $table->time('start');
             $table->time('end');
+            $table->integer('hall');
             $table->string('lokasi');
             $table->string('kelompok')->nullable();
             // $table->timestamps();

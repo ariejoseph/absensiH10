@@ -123,6 +123,7 @@ class JemaatController extends Controller
             // store
             $gereja = User::find($id);
             $gereja->name = $input['name'];
+            $gereja->nickname = $input['nickname'];
             $gereja->email = $input['email'];
             $gereja->role = $input['role'];
             $gereja->status = $input['status'];

@@ -4,11 +4,13 @@
 
 <h2>Daftar Sidang:</h2>
 @if(count($daftarSidang))
-	<ul>
+	<table class="table">
 		@foreach($daftarSidang as $sidang)
-			<li><a href="{{ url('absensi', [$sidang->id]) }}">{{ $sidang->nama }}</a></li>
+			<tr class="clickable-row" data-href="{{ url('absensi', [$sidang->id]) }}" style="cursor: pointer;">
+				<td>{{ $sidang->nama }}</td>
+			</tr>
 		@endforeach
-	</ul>
+	</table>
 @else
 <p>tidak ada.</p>
 @endif

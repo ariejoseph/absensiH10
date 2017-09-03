@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Requests;
 use App\Sidang;
@@ -52,16 +54,21 @@ class SidangController extends Controller
             'sidang' => 'required|max:255',
         ]);
 
-        $sidang = new Sidang;
-        $sidang->nama = $input['nama'];
-        $sidang->sesi = $input['sesi'];
-        $sidang->start = $input['start'];
-        $sidang->end = $input['end'];
-        $sidang->lokasi = $input['lokasi'];
-        $sidang->kelompok = $input['kelompok'];
-        $sidang->save();
-
-        return redirect()->route('sidang');
+        if ($validator->fails()) {
+            return Redirect::to('sidang/create')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            $sidang = new Sidang;
+            $sidang->nama = $input['nama'];
+            $sidang->sesi = $input['sesi'];
+            $sidang->start = $input['start'];
+            $sidang->end = $input['end'];
+            $sidang->lokasi = $input['lokasi'];
+            $sidang->kelompok = $input['kelompok'];
+            $sidang->save();
+            return redirect()->route('sidang');
+        }
     }
 
     /**
