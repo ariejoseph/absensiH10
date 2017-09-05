@@ -22,7 +22,6 @@ class AbsensiController extends Controller
     public function index($sidang)
     {
         $today = date('Y-m-d');
-        $gereja = User::all();
         $hadir = DB::table('absensi')
                     ->select('id_jemaat')
                     ->where([

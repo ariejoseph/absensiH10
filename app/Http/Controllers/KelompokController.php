@@ -147,7 +147,18 @@ class KelompokController extends Controller
 
     public function newMember($id_kelompok)
     {
-        $gereja = User::where('role', '=', 'jemaat')->orderBy('name')->get();
+        $anggotaKelompok = Anggota::all();
+        $arrAnggotaKelompok = [];
+        for($idx = 0; $idx < count($anggotaKelompok); $idx++) {
+            $arrAnggotaKelompok[$idx] = $anggotaKelompok[$idx]->id_jemaat;
+        }
+
+        $gereja = DB::table('users')
+                    ->select('users.id', 'users.name')
+                    ->whereNotIn('id', $arrAnggotaKelompok)
+                    ->where('role', 'jemaat')
+                    ->orderBy('name')
+                    ->get();
         return view('kelompok.newMember', compact('gereja', 'id_kelompok'));
     }
 
