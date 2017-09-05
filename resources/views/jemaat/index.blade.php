@@ -3,7 +3,7 @@
 @section('content')
 
 <h2>List jemaat:</h2>
-<a class="btn btn-small btn-primary pull-right" href="{{ url('jemaat/create') }}"><i class="fa fa-plus"></i> Add user</a>
+<a class="btn btn-small btn-primary pull-right" href="{{ url('jemaat/create') }}" style="margin-bottom: 9px;"><i class="fa fa-plus"></i> Add user</a>
 @if(count($gereja))
 	<table class="table table-striped">
 		<thead>
@@ -35,6 +35,9 @@
 		@endforeach
 		</tbody>
 	</table>
+	<div id="pagination" class="pull-right">
+		{{ $gereja->links() }}
+	</div>
 @else
 <p>tidak ada.</p>
 @endif

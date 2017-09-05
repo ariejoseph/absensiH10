@@ -20,7 +20,7 @@ class JemaatController extends Controller
      */
     public function index()
     {
-        $gereja = User::orderBy('name')->get();
+        $gereja = User::orderBy('name')->paginate(15);
         return view('jemaat.index', compact('gereja'));
     }
 
