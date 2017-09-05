@@ -11,7 +11,7 @@
 	</div>
 	<form class="form-horizontal" role="form" method="POST" action="{{ url('/absensi2') }}" onsubmit="return confirm('Are you sure?')">
 		{{ csrf_field() }}
-		<button id="absen" type="submit" disabled class="btn btn-success" style="padding-left: 6px; padding-right: 6px; padding-top: 3px; padding-bottom: 3px;">
+		<button id="absen" type="submit" disabled class="btn btn-info" style="padding-left: 6px; padding-right: 6px; padding-top: 3px; padding-bottom: 3px;">
 			<i class="fa fa-btn fa-check"> Hadir</i>
 		</button>
 		<input type="hidden" name="sidang" value="{{ $sidang }}">

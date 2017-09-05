@@ -58,8 +58,10 @@
 		var count = $("[type='checkbox']:checked").length;
 		if(count > 0) {
 			$('#absen').attr('disabled',false);
+			$('.fa-check').html(' Hadir(' + count + ')');
 		} else {
 			$('#absen').attr('disabled',true);
+			$('.fa-check').html(' Hadir');
 		}
 	});
 

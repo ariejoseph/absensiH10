@@ -3,7 +3,7 @@
 @section('content')
 
 <h2>Daftar Kelompok:</h2>
-<a class="btn btn-small btn-primary pull-right" href="{{ url('kelompok/create') }}"><i class="fa fa-plus"></i> Add kelompok</a>
+<a class="btn btn-small btn-primary pull-right" href="{{ url('kelompok/create') }}" style="margin-bottom: 9px;"><i class="fa fa-plus"></i> Add kelompok</a>
 @if(count($daftarKelompok))
 	<table class="table table-striped">
 		<thead>
