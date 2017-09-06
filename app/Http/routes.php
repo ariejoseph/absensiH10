@@ -16,18 +16,6 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::resource('jemaat', 'JemaatController');
-	Route::get('/jemaat', 'JemaatController@index');
-	Route::get('/jemaat/{id}', 'JemaatController@show');
-
-	Route::resource('kelompok', 'KelompokController');
-	Route::get('/anggota/create/{id_kelompok}', 'KelompokController@newMember');
-	Route::post('/anggota/daftar/{id_kelompok}', 'KelompokController@daftar');
-	Route::post('/anggota/hapus/{id_kelompok}/{id_jemaat}', 'KelompokController@hapus');
-
-	Route::resource('sidang', 'SidangController');
-	Route::get('/sidang', 'SidangController@index')->name('sidang');
-
 	Route::get('/absensi', 'SidangController@index')->name('absensi');
 	Route::get('/absensi/{sidang}', 'AbsensiController@index');
 	Route::get('/absensi/{sidang}/{id}', 'AbsensiController@absen');
@@ -35,6 +23,17 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/hadir', 'SidangController@index')->name('hadir');
 	Route::post('/daftarHadir', 'AbsensiController@getDaftarHadir');
+});
+
+Route::group(['middleware' => ['auth', 'admin']], function () {
+	Route::resource('jemaat', 'JemaatController');
+
+	Route::resource('kelompok', 'KelompokController');
+	Route::get('/anggota/create/{id_kelompok}', 'KelompokController@newMember');
+	Route::post('/anggota/daftar/{id_kelompok}', 'KelompokController@daftar');
+	Route::post('/anggota/hapus/{id_kelompok}/{id_jemaat}', 'KelompokController@hapus');
+
+	Route::resource('sidang', 'SidangController');
 });
 
 Route::auth();

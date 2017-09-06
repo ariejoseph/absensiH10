@@ -11,9 +11,11 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             @if (Auth::check())
                 <ul class="nav navbar-nav">
+                @if (Auth::user()->role == 'pewajib')
                     <li class="{{ Request::segment(1) === 'jemaat' ? 'active' : null }}"><a href="/jemaat">Jemaat</a></li>
                     <li class="{{ Request::segment(1) === 'kelompok' ? 'active' : null }}"><a href="/kelompok">Kelompok</a></li>
                     <li class="{{ Request::segment(1) === 'sidang' ? 'active' : null }}"><a href="/sidang">Sidang</a></li>
+                @endif
                     <li class="{{ Request::segment(1) === 'absensi' ? 'active' : null }}"><a href="/absensi">Absensi</a></li>
                     <li class="{{ Request::segment(1) === 'hadir' ? 'active' : null }}"><a href="/hadir">Hadir</a></li>
                 </ul>

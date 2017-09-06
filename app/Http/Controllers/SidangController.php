@@ -26,7 +26,7 @@ class SidangController extends Controller
 			return view('sidang.absensiSidang', compact('daftarSidang'));
         } elseif ($routeName == 'hadir') {
         	return view('sidang.daftarSidang', compact('daftarSidang'));
-    	} else { // routeName == 'sidang'
+    	} else { // routeName == 'sidang.index'
             return view('sidang.index', compact('daftarSidang'));
         }
     }
