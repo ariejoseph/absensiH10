@@ -137,7 +137,7 @@
                             <label for="hall" class="col-md-4 control-label">Hall</label>
 
                             <div class="col-md-6">
-                                <input id="hall" type="number" class="form-control" name="hall" value="{{ old('hall') }}">
+                                <input id="hall" type="number" min="1" class="form-control" name="hall" value="{{ old('hall') }}">
 
                                 @if ($errors->has('hall'))
                                     <span class="help-block">

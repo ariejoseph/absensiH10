@@ -45,7 +45,17 @@ class JemaatController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, [
             'name' => 'required|max:255',
+            'nickname' => 'required|max:255',
             'email' => 'email|max:255|unique:users',
+            'username' => 'max:255|unique:users',
+            'role' => 'required',
+            'status' => 'required',
+            'hall' => 'required',
+            'gender' => 'required',
+            'place_of_birth' => 'required',
+            'date_of_birth' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -112,7 +122,13 @@ class JemaatController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, [
             'name' => 'required|max:255',
+            'nickname' => 'required|max:255',
             'email' => 'email|max:255|unique:users',
+            'role' => 'required',
+            'status' => 'required',
+            'hall' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
         ]);
 
         if ($validator->fails()) {

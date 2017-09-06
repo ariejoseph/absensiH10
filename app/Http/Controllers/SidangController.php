@@ -51,7 +51,9 @@ class SidangController extends Controller
     {
         $input = $request->all();
         $validator = Validator::make($input, [
-            'sidang' => 'required|max:255',
+            'nama' => 'required',
+            'hari' => 'required',
+            'start' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -62,12 +64,13 @@ class SidangController extends Controller
             $sidang = new Sidang;
             $sidang->nama = $input['nama'];
             $sidang->sesi = $input['sesi'];
+            $sidang->hari = $input['hari'];
             $sidang->start = $input['start'];
             $sidang->end = $input['end'];
             $sidang->lokasi = $input['lokasi'];
             $sidang->kelompok = $input['kelompok'];
             $sidang->save();
-            return redirect()->route('sidang');
+            return redirect()->route('sidang.index');
         }
     }
 
@@ -104,7 +107,29 @@ class SidangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'nama' => 'required',
+            'hari' => 'required',
+            'start' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::to('sidang/' . $id . '/edit')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {
+            $sidang = Sidang::find($id);
+            $sidang->nama = $input['nama'];
+            $sidang->sesi = $input['sesi'];
+            $sidang->hari = $input['hari'];
+            $sidang->start = $input['start'];
+            $sidang->end = $input['end'];
+            $sidang->lokasi = $input['lokasi'];
+            $sidang->kelompok = $input['kelompok'];
+            $sidang->save();
+            return redirect()->route('sidang.index');
+        }
     }
 
     /**

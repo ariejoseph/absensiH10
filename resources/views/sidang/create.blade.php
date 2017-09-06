@@ -30,11 +30,34 @@
                             <label for="sesi" class="col-md-4 control-label">Sesi</label>
 
                             <div class="col-md-6">
-                                <input id="sesi" type="number" class="form-control" name="sesi" value="{{ old('sesi') }}">
+                                <input id="sesi" type="number" min="1" class="form-control" name="sesi" value="{{ old('sesi') }}">
 
                                 @if ($errors->has('sesi'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('sesi') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('hari') ? ' has-error' : '' }}">
+                            <label for="hari" class="col-md-4 control-label">Hari</label>
+
+                            <div class="col-md-6">
+                                <!-- <input id="role" type="text" class="form-control" name="role" value="{{ old('role') }}"> -->
+                                <select name="hari" class="form-control">
+                                    <option value="Senin">Senin</option>
+                                    <option value="Selasa">Selasa</option>
+                                    <option value="Rabu">Rabu</option>
+                                    <option value="Kamis">Kamis</option>
+                                    <option value="Jumat">Jumat</option>
+                                    <option value="Sabtu">Sabtu</option>
+                                    <option value="Minggu">Minggu</option>
+                                </select>
+
+                                @if ($errors->has('hari'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('hari') }}</strong>
                                     </span>
                                 @endif
                             </div>

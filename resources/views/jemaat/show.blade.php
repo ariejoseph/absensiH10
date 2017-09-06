@@ -26,7 +26,7 @@
 								</tr>
 								<tr>
 									<td>Tempat Tanggal Lahir</td>
-									<td>{{ $gereja->place_of_birth }}, {{ $gereja->date_of_birth }}</td>
+									<td>{{ $gereja->place_of_birth }}, {{ date('d/m/Y', strtotime($gereja->date_of_birth)) }}</td>
 								</tr>
 								<tr>
 									<td>Alamat</td>

@@ -40,7 +40,6 @@ class AbsensiController extends Controller
                     ->get();
 
         $namaSidang = Sidang::find($sidang)->nama;
-        $today = date('F j, Y');
         return view('absensi.index', compact('gereja', 'sidang', 'namaSidang', 'today'));
     }
 
@@ -70,7 +69,6 @@ class AbsensiController extends Controller
                     ->whereNotIn('id', $arrHadir)
                     ->orderBy('name')
                     ->get();
-        $tanggal = date('F j, Y', strtotime($tanggal));
         return view('absensi.hadir', compact('daftarHadir', 'namaSidang', 'tanggal', 'yangAbsen'));
     }
 

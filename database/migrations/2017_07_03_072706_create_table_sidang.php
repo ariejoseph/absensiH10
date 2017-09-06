@@ -16,6 +16,7 @@ class CreateTableSidang extends Migration
             $table->increments('id');
             $table->string('nama');
             $table->string('sesi');
+            $table->string('hari');
             $table->time('start');
             $table->time('end');
             $table->integer('hall');
