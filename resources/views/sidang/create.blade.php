@@ -26,6 +26,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('hall') ? ' has-error' : '' }}">
+                            <label for="hall" class="col-md-4 control-label">Hall</label>
+
+                            <div class="col-md-6">
+                                <input id="hall" type="number" min="1" class="form-control" name="hall" value="{{ old('hall') }}">
+
+                                @if ($errors->has('hall'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('hall') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('sesi') ? ' has-error' : '' }}">
                             <label for="sesi" class="col-md-4 control-label">Sesi</label>
 

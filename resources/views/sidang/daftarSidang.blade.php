@@ -13,7 +13,7 @@
             <!-- <input id="sidang" type="text" class="form-control" name="sidang" value="{{ old('sidang') }}"> -->
             <select name="sidang" class="form-control">
             	@foreach($daftarSidang as $sidang)
-            		<option value="{{ $sidang->id }}">{{ $sidang->nama }}</option>
+            		<option value="{{ $sidang->nama }}">{{ $sidang->nama }}</option>
             	@endforeach
             </select>
 

@@ -22,54 +22,72 @@ class AbsensiController extends Controller
     public function index($sidang)
     {
         $today = date('Y-m-d');
-        $hadir = DB::table('absensi')
-                    ->select('id_jemaat')
-                    ->where([
-                        ['id_sidang', '=', $sidang],
-                        ['tanggal', '=', $today],
-                    ])->get();
-        $arrHadir = [];
-        for($idx = 0; $idx < count($hadir); $idx++) {
-            $arrHadir[$idx] = $hadir[$idx]->id_jemaat;
-        }
+        $namaSidang = Sidang::find($sidang)->nama;
+        $arrIdSidang = Sidang::where('nama', $namaSidang)
+                        ->select('id')
+                        ->get()
+                        ->toArray();
+        $hadir = Absensi::select('id_jemaat')
+                    ->whereIn('id_sidang', $arrIdSidang)
+                    ->where('tanggal', '=', $today)
+                    ->get()
+                    ->toArray();
 
         $gereja = DB::table('users')
                     ->select('id', 'name')
-                    ->whereNotIn('id', $arrHadir)
+                    ->whereNotIn('id', $hadir)
                     ->orderBy('name')
                     ->get();
 
-        $namaSidang = Sidang::find($sidang)->nama;
         return view('absensi.index', compact('gereja', 'sidang', 'namaSidang', 'today'));
     }
 
     public function getDaftarHadir(Request $request)
     {
         // $input = $request->all();
-        $sidang = $request->input('sidang');
-        $namaSidang = Sidang::find($sidang)->nama;
+        $namaSidang = $request->input('sidang');
+        $listSidang = Sidang::select('id')
+                        ->where('nama', $namaSidang)
+                        ->orderBy('id')
+                        ->get();
         $tanggal = $request->input('tanggal');
         $daftarHadir = DB::table('users')
                         ->join('absensi', 'users.id', '=', 'absensi.id_jemaat')
                         ->select('users.id', 'users.name')
-                        ->where([
-                            ['absensi.id_sidang', '=', $sidang],
-                            ['absensi.tanggal', '=', $tanggal],
-                        ])
+                        ->whereIn('absensi.id_sidang', $listSidang)
+                        ->where('absensi.tanggal', '=', $tanggal)
                         ->orderBy('name')
                         ->get();
 
-        $arrHadir = [];
-        for($idx = 0; $idx < count($daftarHadir); $idx++) {
-            $arrHadir[$idx] = $daftarHadir[$idx]->id;
-        }
+        // convert to array
+        $arrHadir = json_decode(json_encode($daftarHadir), true);
 
         $yangAbsen = DB::table('users')
-                    ->select('id', 'name')
-                    ->whereNotIn('id', $arrHadir)
-                    ->orderBy('name')
-                    ->get();
-        return view('absensi.hadir', compact('daftarHadir', 'namaSidang', 'tanggal', 'yangAbsen'));
+                        ->select('id', 'name')
+                        ->whereNotIn('id', $arrHadir)
+                        ->orderBy('name')
+                        ->get();
+
+        $listSidang = Sidang::select('*')
+                        ->where('nama', $namaSidang)
+                        ->orderBy('id')
+                        ->get();
+
+        $dataResponse = [];
+        foreach($listSidang as $sidang) {
+            $listJemaat = DB::table('users')
+                            ->join('absensi', 'users.id', '=', 'absensi.id_jemaat')
+                            ->select('users.id', 'users.name')
+                            ->where('absensi.id_sidang', $sidang->id)
+                            ->where('absensi.tanggal', '=', $tanggal)
+                            ->orderBy('name')
+                            ->get();
+            $dataResponse[$sidang->id] = [];
+            $dataResponse[$sidang->id]["sidang"] = $sidang;
+            $dataResponse[$sidang->id]["jemaat"] = $listJemaat;
+        }
+        return view('absensi.hadir', 
+                    compact('daftarHadir', 'namaSidang', 'tanggal', 'yangAbsen', 'dataResponse'));
     }
 
     /**

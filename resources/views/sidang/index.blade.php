@@ -9,6 +9,7 @@
 		<thead>
 			<tr>
 				<th>Sidang</th>
+				<th>Hall</th>
 				<th>Sesi</th>
 				<th>Hari</th>
 				<th>Waktu</th>
@@ -20,6 +21,7 @@
 		@foreach($daftarSidang as $sidang)
 			<tr class="clickable-row" data-href="{{ url(route('sidang.edit', [$sidang->id])) }}" style="cursor: pointer;">
 				<td>{{ $sidang->nama }}</td>
+				<td>{{ $sidang->hall }}</td>
 				<td>{{ $sidang->sesi }}</td>
 				<td>{{ $sidang->hari }}</td>
 				<td>{{ $sidang->start }} - {{ $sidang->end}}</td>

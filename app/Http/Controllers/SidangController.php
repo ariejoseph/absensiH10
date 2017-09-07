@@ -25,6 +25,7 @@ class SidangController extends Controller
         if($routeName == 'absensi') {
 			return view('sidang.absensiSidang', compact('daftarSidang'));
         } elseif ($routeName == 'hadir') {
+            $daftarSidang = Sidang::select('nama')->distinct()->get();
         	return view('sidang.daftarSidang', compact('daftarSidang'));
     	} else { // routeName == 'sidang.index'
             return view('sidang.index', compact('daftarSidang'));
@@ -52,6 +53,7 @@ class SidangController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, [
             'nama' => 'required',
+            'hall' => 'required',
             'hari' => 'required',
             'start' => 'required',
         ]);
@@ -63,6 +65,7 @@ class SidangController extends Controller
         } else {
             $sidang = new Sidang;
             $sidang->nama = $input['nama'];
+            $sidang->hall = $input['hall'];
             $sidang->sesi = $input['sesi'];
             $sidang->hari = $input['hari'];
             $sidang->start = $input['start'];
@@ -121,6 +124,7 @@ class SidangController extends Controller
         } else {
             $sidang = Sidang::find($id);
             $sidang->nama = $input['nama'];
+            $sidang->hall = $input['hall'];
             $sidang->sesi = $input['sesi'];
             $sidang->hari = $input['hari'];
             $sidang->start = $input['start'];
