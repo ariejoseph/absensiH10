@@ -25,7 +25,7 @@ class SidangController extends Controller
         if($routeName == 'absensi') {
 			return view('sidang.absensiSidang', compact('daftarSidang'));
         } elseif ($routeName == 'hadir') {
-            $daftarSidang = Sidang::select('nama')->orderBy('nama')->orderBy('id')->distinct()->get();
+            $daftarSidang = Sidang::select('nama')->orderBy('nama')->distinct()->get();
         	return view('sidang.daftarSidang', compact('daftarSidang'));
     	} else { // routeName == 'sidang.index'
             return view('sidang.index', compact('daftarSidang'));
