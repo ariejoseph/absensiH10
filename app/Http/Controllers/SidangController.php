@@ -20,12 +20,12 @@ class SidangController extends Controller
      */
     public function index()
     {
-        $daftarSidang = Sidang::all();
+        $daftarSidang = Sidang::orderBy('nama')->get();
         $routeName = Route::currentRouteName();
         if($routeName == 'absensi') {
 			return view('sidang.absensiSidang', compact('daftarSidang'));
         } elseif ($routeName == 'hadir') {
-            $daftarSidang = Sidang::select('nama')->distinct()->get();
+            $daftarSidang = Sidang::select('nama')->orderBy('nama')->distinct()->get();
         	return view('sidang.daftarSidang', compact('daftarSidang'));
     	} else { // routeName == 'sidang.index'
             return view('sidang.index', compact('daftarSidang'));
