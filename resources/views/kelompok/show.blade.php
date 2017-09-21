@@ -6,7 +6,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad" >
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h2 style="margin: 0;">Kelompok {{$kelompok->id}}</h2>
+				<h2 style="margin: 0;">Grup {{$kelompok->id}}</h2>
 			</div>
 			<div class="panel-body">
 				<div class="row">

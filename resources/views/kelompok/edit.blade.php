@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2>Edit Kelompok {{ $kelompok->id }}</h2>
+<h2>Edit Grup {{ $kelompok->id }}</h2>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

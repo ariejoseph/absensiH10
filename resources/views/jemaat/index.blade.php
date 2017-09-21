@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2>List jemaat:</h2>
+<h2>Daftar Kaum Saleh:</h2>
 <a class="btn btn-small btn-primary pull-right" href="{{ url('jemaat/create') }}" style="margin-bottom: 9px;"><i class="fa fa-plus"></i> Add user</a>
 @if(count($gereja))
 	<table class="table table-striped">

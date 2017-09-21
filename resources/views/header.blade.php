@@ -6,18 +6,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>                        
             </button>
-            <a class="navbar-brand" href="/">Hall X</a>
+            <a class="navbar-brand" href="/">Hall 10</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             @if (Auth::check())
                 <ul class="nav navbar-nav">
                 @if (Auth::user()->role == 'pewajib')
-                    <li class="{{ Request::segment(1) === 'jemaat' ? 'active' : null }}"><a href="/jemaat">Jemaat</a></li>
-                    <li class="{{ Request::segment(1) === 'kelompok' ? 'active' : null }}"><a href="/kelompok">Kelompok</a></li>
-                    <li class="{{ Request::segment(1) === 'sidang' ? 'active' : null }}"><a href="/sidang">Sidang</a></li>
+                    <li class="{{ Request::segment(1) === 'jemaat' ? 'active' : null }}"><a href="/jemaat">Kaum Saleh</a></li>
+                    <li class="{{ Request::segment(1) === 'kelompok' ? 'active' : null }}"><a href="/kelompok">Daftar Grup</a></li>
+                    <li class="{{ Request::segment(1) === 'sidang' ? 'active' : null }}"><a href="/sidang">Daftar Sidang</a></li>
                 @endif
                     <li class="{{ Request::segment(1) === 'absensi' ? 'active' : null }}"><a href="/absensi">Absensi</a></li>
-                    <li class="{{ Request::segment(1) === 'hadir' ? 'active' : null }}"><a href="/hadir">Hadir</a></li>
+                    <li class="{{ Request::segment(1) === 'hadir' ? 'active' : null }}"><a href="/hadir">Laporan</a></li>
                 </ul>
             @endif
             <!-- Right Side Of Navbar -->
