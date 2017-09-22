@@ -13,11 +13,12 @@
                 <ul class="nav navbar-nav">
                 @if (Auth::user()->role == 'pewajib')
                     <li class="{{ Request::segment(1) === 'jemaat' ? 'active' : null }}"><a href="/jemaat">Kaum Saleh</a></li>
-                    <li class="{{ Request::segment(1) === 'kelompok' ? 'active' : null }}"><a href="/kelompok">Daftar Grup</a></li>
                     <li class="{{ Request::segment(1) === 'sidang' ? 'active' : null }}"><a href="/sidang">Daftar Sidang</a></li>
+                    <li class="{{ Request::segment(1) === 'kelompok' ? 'active' : null }}"><a href="/kelompok">Daftar Grup</a></li>
                 @endif
                     <li class="{{ Request::segment(1) === 'absensi' ? 'active' : null }}"><a href="/absensi">Absensi</a></li>
                     <li class="{{ Request::segment(1) === 'hadir' ? 'active' : null }}"><a href="/hadir">Laporan</a></li>
+                    <li class="{{ Request::segment(1) === 'analisa' ? 'active' : null }}"><a href="#">Analisa</a></li>
                 </ul>
             @endif
             <!-- Right Side Of Navbar -->

@@ -90,4 +90,15 @@ class AuthController extends Controller
             'phone' => $data['phone'],
         ]);
     }
+
+    // disable registration
+    public function showRegistrationForm()
+    {
+        return redirect('login');
+    }
+
+    public function register()
+    {
+
+    }
 }
