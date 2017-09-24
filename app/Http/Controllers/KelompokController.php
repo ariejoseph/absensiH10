@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Requests;
 use App\Kelompok;
@@ -23,12 +24,18 @@ class KelompokController extends Controller
      */
     public function index()
     {
+        $daftarSidang = Sidang::select('nama')->orderBy('nama')->distinct()->get();
+        return view('kelompok.daftarSidang', compact('daftarSidang'));
+    }
+
+    public function index2($sidang) {
         $daftarKelompok = DB::table('kelompok')
                             ->join('users AS koor', 'kelompok.id_koordinator', '=', 'koor.id')
                             ->join('users AS asis', 'kelompok.id_asisten', '=', 'asis.id')
-                            ->select('kelompok.id', 'koor.name AS koordinator', 'asis.name AS asisten')
+                            ->select('kelompok.id', 'koor.name AS koordinator', 'asis.name AS asisten', 'kelompok.sidang')
+                            ->where('kelompok.sidang', $sidang)
                             ->get();
-        return view('kelompok.index', compact('daftarKelompok'));
+        return view('kelompok.index', compact('daftarKelompok', 'sidang'));
     }
 
     /**
@@ -36,11 +43,11 @@ class KelompokController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($sidang)
     {
         $gerejaKoor = User::where('role', '=', 'koordinator')->orderBy('name')->get();
         $gereja = User::where('role', '=', 'jemaat')->orderBy('name')->get();
-        return view('kelompok.create', compact('gereja', 'gerejaKoor'));
+        return view('kelompok.create', compact('gereja', 'gerejaKoor', 'sidang'));
     }
 
     /**
@@ -63,6 +70,7 @@ class KelompokController extends Controller
                 ->withInput(Input::except('password'));
         } else {
             $kelompok = new Kelompok;
+            $kelompok->sidang = $input['sidang'];
             $kelompok->id_koordinator = $input['koordinator'];
             $kelompok->id_asisten = $input['asisten'];
             $kelompok->save();

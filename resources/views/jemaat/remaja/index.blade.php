@@ -3,14 +3,14 @@
 @section('content')
 
 <ul class="nav nav-tabs">
-	<li class="active"><a href="#">Kaum Saleh</a></li>
+	<li><a href="/jemaat">Kaum Saleh</a></li>
 	<li><a href="/anak">Anak-Anak</a></li>
-	<li><a href="/remaja">Remaja</a></li>
+	<li class="active"><a href="#">Remaja</a></li>
 	<li><a href="/pemuda">Pemuda</a></li>
 </ul>
 
-<h2>Daftar Kaum Saleh:</h2>
-<a class="btn btn-small btn-primary pull-right" href="{{ url('jemaat/create') }}" style="margin-bottom: 9px;"><i class="fa fa-plus"></i> Add Kaum Saleh</a>
+<h2>Daftar Remaja:</h2>
+<a class="btn btn-small btn-primary pull-right" href="{{ url('remaja/create') }}" style="margin-bottom: 9px;"><i class="fa fa-plus"></i> Add Remaja</a>
 @if(count($gereja))
 	<table class="table table-striped">
 		<thead>
@@ -24,7 +24,7 @@
 		</thead>
 		<tbody>
 		@foreach($gereja as $saudara)
-			<tr class="clickable-row" data-href="{{ url('jemaat', [$saudara->id]) }}" style="cursor: pointer;">
+			<tr class="clickable-row" data-href="{{ url('remaja', [$saudara->id]) }}" style="cursor: pointer;">
 				<td>{{ $saudara->name }}</td>
 				<td>{{ $saudara->nickname }}</td>
 				<td>{{ $saudara->gender }}</td>

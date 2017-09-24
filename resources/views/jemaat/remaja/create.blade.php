@@ -2,16 +2,16 @@
 
 @section('content')
 
-<h2>Kaum Saleh Baru</h2>
+<h2>Remaja Baru</h2>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/jemaat') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/remaja/save') }}">
                         {{ csrf_field() }}
-                        <input type="hidden" name="kategori" value="umum">
+                        <input type="hidden" name="kategori" value="remaja">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Nama</label>
 
@@ -91,43 +91,6 @@
                                 @if ($errors->has('password_confirmation'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                            <label for="role" class="col-md-4 control-label">Peran</label>
-
-                            <div class="col-md-6">
-                                <!-- <input id="role" type="text" class="form-control" name="role" value="{{ old('role') }}"> -->
-                                <select name="role" class="form-control">
-                                    <option value="pewajib">Pewajib</option>
-                                    <option value="koordinator">Koordinator</option>
-                                    <option value="jemaat">Jemaat</option>
-                                </select>
-
-                                @if ($errors->has('role'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('role') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                            <label for="status" class="col-md-4 control-label">Status</label>
-
-                            <div class="col-md-6">
-                                <!-- <input id="status" type="text" class="form-control" name="status" value="{{ old('status') }}"> -->
-                                <select name="status" class="form-control">
-                                    <option value="hidup">Hidup</option>
-                                    <option value="mati">Mati</option>
-                                </select>
-
-                                @if ($errors->has('status'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('status') }}</strong>
                                     </span>
                                 @endif
                             </div>
