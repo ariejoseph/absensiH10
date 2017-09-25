@@ -48,24 +48,6 @@
                             </div>
                         </div>
 
-                        <!-- <div class="form-group{{ $errors->has('anggota') ? ' has-error' : '' }}">
-                            <label for="anggota" class="col-md-4 control-label">Anggota</label>
-
-                            <div class="col-md-6">
-                                <select name="anggota" class="form-control">
-                                    @foreach($gereja as $saudara)
-                                        <option value="{{ $saudara->id }}">{{ $saudara->name }}</option>
-                                    @endforeach
-                                </select>
-
-                                @if ($errors->has('anggota'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('anggota') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div> -->
-
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

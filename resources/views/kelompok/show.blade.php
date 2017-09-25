@@ -15,6 +15,11 @@
 						<table class="table table-user-information">
 							<tbody>
 								<tr>
+									<td style="vertical-align: middle;">Sidang</td>
+									<td style="vertical-align: middle;">{{ $kelompok->sidang }}</td>
+									<td></td>
+								</tr>
+								<tr>
 									<td style="vertical-align: middle;">Koordinator</td>
 									<td style="vertical-align: middle;">{{ $kelompok->koordinator }}</td>
 									<td><!-- <a href="{{ url('kelompok/'. $kelompok->id .'/edit') }}" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning pull-right"><i class="glyphicon glyphicon-edit"></i></a> --></td>

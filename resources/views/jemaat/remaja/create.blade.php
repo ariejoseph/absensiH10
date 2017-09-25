@@ -115,8 +115,8 @@
 
                             <div class="col-md-6">
                                 <!-- <input id="gender" type="text" class="form-control" name="gender" value="{{ old('gender') }}"> -->
-                                <input type="radio" name="gender" value="Laki-laki" checked> Laki-laki<br>
-                                <input type="radio" name="gender" value="Perempuan"> Perempuan<br>
+                                <input type="radio" name="gender" value="laki-laki" checked> Laki-laki<br>
+                                <input type="radio" name="gender" value="perempuan"> Perempuan<br>
 
                                 @if ($errors->has('gender'))
                                     <span class="help-block">

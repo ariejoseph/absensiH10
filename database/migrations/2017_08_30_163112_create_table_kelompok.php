@@ -22,7 +22,7 @@ class CreateTableKelompok extends Migration
             $table->foreign('id_asisten')->references('id')->on('users');
             // $table->foreign('id_jemaat')->references('id')->on('users');
             // $table->foreign('id_sidang')->references('id')->on('sidang');
-            $table->unique(['id_koordinator', 'id_asisten']);
+            // $table->unique(['id_koordinator', 'id_asisten']);
             // $table->timestamps();
         });
     }

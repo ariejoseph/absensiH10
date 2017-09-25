@@ -46,8 +46,8 @@ class KelompokController extends Controller
     public function create($sidang)
     {
         $gerejaKoor = User::where('role', '=', 'koordinator')->orderBy('name')->get();
-        $gereja = User::where('role', '=', 'jemaat')->orderBy('name')->get();
-        return view('kelompok.create', compact('gereja', 'gerejaKoor', 'sidang'));
+        // $gereja = User::where('role', '=', 'jemaat')->orderBy('name')->get();
+        return view('kelompok.create', compact('gerejaKoor', 'sidang'));
     }
 
     /**
@@ -65,7 +65,7 @@ class KelompokController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return Redirect::to('kelompok/create')
+            return Redirect::to('kelompok/create/'.$input['sidang'])
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         } else {
@@ -74,7 +74,7 @@ class KelompokController extends Controller
             $kelompok->id_koordinator = $input['koordinator'];
             $kelompok->id_asisten = $input['asisten'];
             $kelompok->save();
-            return redirect('/kelompok');
+            return redirect('/kelompok/sidang/'.$input['sidang']);
         }
     }
 
@@ -89,7 +89,8 @@ class KelompokController extends Controller
         $kelompok = DB::table('kelompok')
                     ->join('users AS koor', 'kelompok.id_koordinator', '=', 'koor.id')
                     ->join('users AS asis', 'kelompok.id_asisten', '=', 'asis.id')
-                    ->select('kelompok.id', 'koor.name AS koordinator', 'asis.name AS asisten')
+                    ->select('kelompok.id', 'koor.name AS koordinator', 
+                        'asis.name AS asisten', 'kelompok.sidang')
                     ->where('kelompok.id' , '=', $id)
                     ->first();
         $listAnggota = DB::table('anggota')
@@ -138,7 +139,7 @@ class KelompokController extends Controller
             $kelompok->id_koordinator = $input['koordinator'];
             $kelompok->id_asisten = $input['asisten'];
             $kelompok->save();
-            return redirect('/kelompok');
+            return redirect('/kelompok/sidang/'.$kelompok->sidang);
         }
     }
 
@@ -155,18 +156,66 @@ class KelompokController extends Controller
 
     public function newMember($id_kelompok)
     {
+        $sidang = DB::table('kelompok')->where('id', $id_kelompok)->select('sidang')->get();
         $anggotaKelompok = Anggota::all();
         $arrAnggotaKelompok = [];
         for($idx = 0; $idx < count($anggotaKelompok); $idx++) {
             $arrAnggotaKelompok[$idx] = $anggotaKelompok[$idx]->id_jemaat;
         }
 
-        $gereja = DB::table('users')
-                    ->select('users.id', 'users.name')
-                    ->whereNotIn('id', $arrAnggotaKelompok)
-                    ->where('role', 'jemaat')
-                    ->orderBy('name')
-                    ->get();
+        $namaSidang = $sidang[0]->sidang;
+        if($namaSidang == 'Sidang Anak-Anak') {
+            $gereja = DB::table('users')
+                        ->select('users.id', 'users.name')
+                        ->whereNotIn('id', $arrAnggotaKelompok)
+                        ->where([
+                            ['role', 'jemaat'],
+                            ['kategori', 'anak']
+                        ])
+                        ->orderBy('name')
+                        ->get();
+        } else if($namaSidang == 'Sidang Remaja') {
+            $gereja = DB::table('users')
+                        ->select('users.id', 'users.name')
+                        ->whereNotIn('id', $arrAnggotaKelompok)
+                        ->where([
+                            ['role', 'jemaat'],
+                            ['kategori', 'remaja']
+                        ])
+                        ->orderBy('name')
+                        ->get();
+        } else if($namaSidang == 'Sidang Pemuda') {
+            $gereja = DB::table('users')
+                        ->select('users.id', 'users.name')
+                        ->whereNotIn('id', $arrAnggotaKelompok)
+                        ->where([
+                            ['role', 'jemaat'],
+                            ['kategori', 'pemuda']
+                        ])
+                        ->orderBy('name')
+                        ->get();
+        } else if($namaSidang == 'Sidang Saudari') {
+            $gereja = DB::table('users')
+                        ->select('users.id', 'users.name')
+                        ->whereNotIn('id', $arrAnggotaKelompok)
+                        ->where([
+                            ['role', 'jemaat'],
+                            ['kategori', 'umum'],
+                            ['gender', 'perempuan']
+                        ])
+                        ->orderBy('name')
+                        ->get();
+        } else {
+            $gereja = DB::table('users')
+                        ->select('users.id', 'users.name')
+                        ->whereNotIn('id', $arrAnggotaKelompok)
+                        ->where([
+                            ['role', 'jemaat'],
+                            ['kategori', 'umum']
+                        ])
+                        ->orderBy('name')
+                        ->get();
+        }
         return view('kelompok.newMember', compact('gereja', 'id_kelompok'));
     }
 
