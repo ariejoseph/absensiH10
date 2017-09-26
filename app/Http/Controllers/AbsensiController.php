@@ -8,9 +8,12 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Requests;
-use App\User;
 use App\Absensi;
+use App\Anggota;
+use App\Kelompok;
 use App\Sidang;
+use App\User;
+use Auth;
 
 class AbsensiController extends Controller
 {
@@ -23,6 +26,17 @@ class AbsensiController extends Controller
     {
         $today = date('Y-m-d');
         $namaSidang = Sidang::find($sidang)->nama;
+
+        $userId = Auth::user()->id;
+        $idKelompok = Kelompok::where('sidang', $namaSidang)
+                        ->orWhere([
+                            ['id_koordinator', $userId],
+                            ['id_asisten', $userId]
+                        ])
+                        ->select('id')
+                        ->get()
+                        ->toArray();
+        
         $arrIdSidang = Sidang::where('nama', $namaSidang)
                         ->select('id')
                         ->get()
@@ -33,12 +47,18 @@ class AbsensiController extends Controller
                     ->get()
                     ->toArray();
 
-        $gereja = DB::table('users')
-                    ->select('id', 'name')
-                    ->whereNotIn('id', $hadir)
-                    ->orderBy('name')
-                    ->get();
-
+        if(!empty($idKelompok)) {
+            $gereja = DB::table('anggota')
+                        ->join('users', 'users.id', '=', 'anggota.id_jemaat')
+                        ->select('users.id', 'users.name', 'anggota.id_kelompok')
+                        ->whereIn('anggota.id_kelompok', $idKelompok)
+                        ->whereNotIn('users.id', $hadir)
+                        ->orderBy('users.name')
+                        ->get();
+        } else {
+            return response('Maaf, kamu bukan koordinator absen :)', 401);
+        }
+        // var_dump($idKelompok);
         return view('absensi.index', compact('gereja', 'sidang', 'namaSidang', 'today'));
     }
 
