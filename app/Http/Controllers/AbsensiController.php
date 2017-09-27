@@ -55,11 +55,19 @@ class AbsensiController extends Controller
                         ->whereNotIn('users.id', $hadir)
                         ->orderBy('users.name')
                         ->get();
+
+            $idKoorAsis = Kelompok::where('id', $idKelompok)
+                                ->select('id_koordinator', 'id_asisten')
+                                ->get()
+                                ->toArray();
+
+            $arrKoorAsis = [$idKoorAsis[0]['id_koordinator'], $idKoorAsis[0]['id_asisten']];
+            $koordinator = User::whereIn('id', $arrKoorAsis)->select('id', 'name')->get();
         } else {
             return response('Maaf, kamu bukan koordinator absen :)', 401);
         }
-        // var_dump($idKelompok);
-        return view('absensi.index', compact('gereja', 'sidang', 'namaSidang', 'today'));
+        // var_dump($koordinator);
+        return view('absensi.index', compact('koordinator', 'gereja', 'sidang', 'namaSidang', 'today'));
     }
 
     public function getDaftarHadir(Request $request)
@@ -82,11 +90,42 @@ class AbsensiController extends Controller
         // convert to array
         $arrHadir = json_decode(json_encode($daftarHadir), true);
 
-        $yangAbsen = DB::table('users')
-                        ->select('id', 'name')
-                        ->whereNotIn('id', $arrHadir)
-                        ->orderBy('name')
-                        ->get();
+        if($namaSidang == 'Sidang Anak-Anak') {
+            $yangAbsen = DB::table('users')
+                            ->select('id', 'name')
+                            ->where('kategori', 'anak')
+                            ->whereNotIn('id', $arrHadir)
+                            ->orderBy('name')
+                            ->get();
+        } else if($namaSidang == 'Sidang Remaja') {
+            $yangAbsen = DB::table('users')
+                            ->select('id', 'name')
+                            ->where('kategori', 'remaja')
+                            ->whereNotIn('id', $arrHadir)
+                            ->orderBy('name')
+                            ->get();
+        } else if($namaSidang == 'Sidang Pemuda') {
+            $yangAbsen = DB::table('users')
+                            ->select('id', 'name')
+                            ->where('kategori', 'pemuda')
+                            ->whereNotIn('id', $arrHadir)
+                            ->orderBy('name')
+                            ->get();
+        } else if($namaSidang == 'Sidang Saudari') {
+            $yangAbsen = DB::table('users')
+                            ->select('id', 'name')
+                            ->where([['kategori', 'umum'], ['gender', 'perempuan']])
+                            ->whereNotIn('id', $arrHadir)
+                            ->orderBy('name')
+                            ->get();
+        } else {
+            $yangAbsen = DB::table('users')
+                            ->select('id', 'name')
+                            ->where('kategori', 'umum')
+                            ->whereNotIn('id', $arrHadir)
+                            ->orderBy('name')
+                            ->get();
+        }
 
         $listSidang = Sidang::select('*')
                         ->where('nama', $namaSidang)

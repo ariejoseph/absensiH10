@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Requests;
 use App\Sidang;
+use Auth;
 use Validator;
 
 class SidangController extends Controller
@@ -20,12 +21,13 @@ class SidangController extends Controller
      */
     public function index()
     {
-        $daftarSidang = Sidang::orderBy('nama')->orderBy('id')->get();
+        $hall = Auth::user()->hall;
+        $daftarSidang = Sidang::where('hall', $hall)->orderBy('nama')->orderBy('id')->get();
         $routeName = Route::currentRouteName();
         if($routeName == 'absensi') {
 			return view('sidang.absensiSidang', compact('daftarSidang'));
         } elseif ($routeName == 'hadir') {
-            $daftarSidang = Sidang::select('nama')->orderBy('nama')->distinct()->get();
+            $daftarSidang = Sidang::where('hall', $hall)->select('nama')->orderBy('nama')->distinct()->get();
         	return view('sidang.daftarSidang', compact('daftarSidang'));
     	} else { // routeName == 'sidang.index'
             return view('sidang.index', compact('daftarSidang'));

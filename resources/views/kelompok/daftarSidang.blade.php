@@ -7,7 +7,7 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Sidang</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>

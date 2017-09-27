@@ -16,6 +16,13 @@
 		</button>
 		<input type="hidden" name="sidang" value="{{ $sidang }}">
 		<table class="table table-striped">
+			@foreach($koordinator as $saudara)
+				<tr>
+					<td style="width: 29px; vertical-align: middle;"><input type="checkbox" name="check_list_jemaat[]" value="{{ $saudara->id }}"></td>
+					<td id="name" style="vertical-align: middle;">{{ $saudara->name }}</td>
+					<td><a href="{{ url('absensi', [$sidang,$saudara->id]) }} " class="btn btn-sm btn-primary pull-right" onclick="return confirm('Are you sure?')">Hadir</a></td>
+				</tr>
+			@endforeach
 			@foreach($gereja as $saudara)
 				<tr>
 					<td style="width: 29px; vertical-align: middle;"><input type="checkbox" name="check_list_jemaat[]" value="{{ $saudara->id }}"></td>

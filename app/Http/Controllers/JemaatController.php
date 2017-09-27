@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Http\Requests;
 use App\User;
+use Auth;
 use Validator;
 
 class JemaatController extends Controller
@@ -21,18 +22,19 @@ class JemaatController extends Controller
      */
     public function index()
     {
+        $hall = Auth::user()->hall;
         $routeName = Route::currentRouteName();
         if($routeName == 'anak') {
-            $gereja = User::where('kategori', 'anak')->orderBy('name')->paginate(15);
+            $gereja = User::where([['kategori', 'anak'], ['hall', $hall]])->orderBy('name')->paginate(15);
             return view('jemaat.anak.index', compact('gereja'));
         } else if($routeName == 'remaja') {
-            $gereja = User::where('kategori', 'remaja')->orderBy('name')->paginate(15);
+            $gereja = User::where([['kategori', 'remaja'], ['hall', $hall]])->orderBy('name')->paginate(15);
             return view('jemaat.remaja.index', compact('gereja'));
         } else if($routeName == 'pemuda') {
-            $gereja = User::where('kategori', 'pemuda')->orderBy('name')->paginate(15);
+            $gereja = User::where([['kategori', 'pemuda'], ['hall', $hall]])->orderBy('name')->paginate(15);
             return view('jemaat.pemuda.index', compact('gereja'));
         } else {
-            $gereja = User::where('kategori', 'umum')->orderBy('name')->paginate(15);
+            $gereja = User::where([['kategori', 'umum'], ['hall', $hall]])->orderBy('name')->paginate(15);
             return view('jemaat.index', compact('gereja'));
         }
     }
@@ -241,8 +243,8 @@ class JemaatController extends Controller
                 $gereja->status = $input['status'];
             }
             $gereja->hall = $input['hall'];
-            // $gereja->username = $input['username'];
-            // $gereja->password = bcrypt($input['password']);
+            $gereja->username = $input['username'];
+            $gereja->password = bcrypt($input['password']);
             // $gereja->gender = $input['gender'];
             // $gereja->place_of_birth = $input['place_of_birth'];
             // $gereja->date_of_birth = date("Y-m-d", strtotime($input['date_of_birth']));
