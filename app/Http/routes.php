@@ -48,6 +48,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::put('anak/{id}', 'JemaatController@update')->name('updateAnak');
 	Route::put('remaja/{id}', 'JemaatController@update')->name('updateRemaja');
 	Route::put('pemuda/{id}', 'JemaatController@update')->name('updatePemuda');
+	Route::get('anak/search/{keyword}', 'JemaatController@search')->name('searchAnak');
+	Route::get('remaja/search/{keyword}', 'JemaatController@search')->name('searchRemaja');
+	Route::get('pemuda/search/{keyword}', 'JemaatController@search')->name('searchPemuda');
+	Route::get('jemaat/search/{keyword}', 'JemaatController@search')->name('search');
 
 	Route::resource('kelompok', 'KelompokController');
 	Route::get('kelompok/create/{sidang}', 'KelompokController@create');

@@ -285,4 +285,46 @@ class JemaatController extends Controller
         Session::flash('message', 'Successfully deleted jemaat!');
         return Redirect::to('jemaat');
     }
+
+    /**
+     * Search user by name keyword
+     *
+     * @param string $keyword
+     * @return \Illuminate\Http\Response
+     */
+    public function search($keyword)
+    {
+        $routeName = Route::currentRouteName();
+        $hall = Auth::user()->hall;
+        if($routeName == 'searchAnak') {
+            $result = User::where([['kategori', 'anak'],
+                                   ['hall', $hall],
+                                   ['name', 'like', '%'.$keyword.'%'],
+                                ])
+                        ->orderBy('name')
+                        ->paginate(15);
+        } else if($routeName == 'searchRemaja') {
+            $result = User::where([['kategori', 'remaja'],
+                                   ['hall', $hall],
+                                   ['name', 'like', '%'.$keyword.'%'],
+                                ])
+                        ->orderBy('name')
+                        ->paginate(15);
+        } else if($routeName == 'searchPemuda') {
+            $result = User::where([['kategori', 'pemuda'],
+                                   ['hall', $hall],
+                                   ['name', 'like', '%'.$keyword.'%'],
+                                ])
+                        ->orderBy('name')
+                        ->paginate(15);
+        } else {
+            $result = User::where([['kategori', 'umum'],
+                                   ['hall', $hall],
+                                   ['name', 'like', '%'.$keyword.'%'],
+                                ])
+                        ->orderBy('name')
+                        ->paginate(15);
+        }
+        var_dump($result);
+    }
 }
