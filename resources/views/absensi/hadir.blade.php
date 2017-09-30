@@ -6,10 +6,12 @@
 @if(count($daftarHadir))
 	<ul>
 		@if(count($dataResponse) == 1)
-			@foreach($sidang['jemaat'] as $saudara)
-				<ul>
-					<li>{{ $saudara->name }}</li>
-				</ul>
+			@foreach($dataResponse as $sidang)
+				@foreach($sidang['jemaat'] as $saudara)
+					<ul>
+						<li>{{ $saudara->name }}</li>
+					</ul>
+				@endforeach
 			@endforeach
 		@else
 			@foreach($dataResponse as $sidang)

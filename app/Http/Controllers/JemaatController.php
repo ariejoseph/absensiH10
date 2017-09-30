@@ -297,34 +297,38 @@ class JemaatController extends Controller
         $routeName = Route::currentRouteName();
         $hall = Auth::user()->hall;
         if($routeName == 'searchAnak') {
-            $result = User::where([['kategori', 'anak'],
+            $gereja = User::where([['kategori', 'anak'],
                                    ['hall', $hall],
                                    ['name', 'like', '%'.$keyword.'%'],
                                 ])
                         ->orderBy('name')
                         ->paginate(15);
+            return view('jemaat.anak.index', compact('gereja', 'keyword'));
         } else if($routeName == 'searchRemaja') {
-            $result = User::where([['kategori', 'remaja'],
+            $gereja = User::where([['kategori', 'remaja'],
                                    ['hall', $hall],
                                    ['name', 'like', '%'.$keyword.'%'],
                                 ])
                         ->orderBy('name')
                         ->paginate(15);
+            return view('jemaat.remaja.index', compact('gereja', 'keyword'));
         } else if($routeName == 'searchPemuda') {
-            $result = User::where([['kategori', 'pemuda'],
+            $gereja = User::where([['kategori', 'pemuda'],
                                    ['hall', $hall],
                                    ['name', 'like', '%'.$keyword.'%'],
                                 ])
                         ->orderBy('name')
                         ->paginate(15);
+            return view('jemaat.pemuda.index', compact('gereja', 'keyword'));
         } else {
-            $result = User::where([['kategori', 'umum'],
+            $gereja = User::where([['kategori', 'umum'],
                                    ['hall', $hall],
                                    ['name', 'like', '%'.$keyword.'%'],
                                 ])
                         ->orderBy('name')
                         ->paginate(15);
+            return view('jemaat.index', compact('gereja', 'keyword'));
         }
-        var_dump($result);
+        var_dump($gereja);
     }
 }

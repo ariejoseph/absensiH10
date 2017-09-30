@@ -10,7 +10,21 @@
 </ul>
 
 <h2>Daftar Remaja:</h2>
-<a class="btn btn-small btn-primary pull-right" href="{{ url('remaja/create') }}" style="margin-bottom: 9px;"><i class="fa fa-plus"></i> Add Remaja</a>
+<div class="row">
+	<div class="col-md-4 col-sm-6 col-xs-7 form-group">
+		<div class="input-group">
+			<input class="form-control" id="search" value="{{ empty($keyword) ? '' : $keyword }}" placeholder="Cari" type="text" onkeydown="if(event.keyCode == 13) { showResult(); return false; }">
+
+	        <div class="input-group-btn">
+	            <button type="button" class="btn btn-default" onclick="showResult()"><i class="glyphicon glyphicon-search"></i>
+	            </button>
+	        </div>
+	    </div>
+	</div>
+	<div class="col-md-8 col-sm-6 col-xs-5">
+		<a class="btn btn-small btn-primary pull-right" href="{{ url('remaja/create') }}"><i class="fa fa-plus"></i> Add Remaja</a>
+	</div>
+</div>
 @if(count($gereja))
 	<table class="table table-striped">
 		<thead>

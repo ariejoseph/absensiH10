@@ -54,6 +54,22 @@
 		clearTimeout(timer);
 	}
 
+	function showResult() {
+		keyword = $('#search').val().toLowerCase();
+		if(keyword != '') {
+			path = location.pathname.split('/')[1];
+			if(path == 'jemaat') {
+				location.href = '/jemaat/search/'+keyword;
+			} else if(path == 'anak') {
+				location.href = '/anak/search/'+keyword;
+			} else if(path == 'remaja') {
+				location.href = '/remaja/search/'+keyword;
+			} else if(path == 'pemuda') {
+				location.href = '/pemuda/search/'+keyword;
+			}
+		}
+	}
+
 	$('input[name="check_list_jemaat[]"]').click(function() {
 		var count = $("[type='checkbox']:checked").length;
 		if(count > 0) {
