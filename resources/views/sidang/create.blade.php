@@ -17,13 +17,9 @@
 
                             <div class="col-md-6">
                                 <select name="nama" class="form-control">
-                                    <option value="Sidang Pemecahan Roti">Sidang Pemecahan Roti</option>
-                                    <option value="Sidang Kelompok">Sidang Kelompok</option>
-                                    <option value="Sidang Doa">Sidang Doa</option>
-                                    <option value="Sidang Saudari">Sidang Saudari</option>
-                                    <option value="Sidang Anak-Anak">Sidang Anak-Anak</option>
-                                    <option value="Sidang Remaja">Sidang Remaja</option>
-                                    <option value="Sidang Pemuda">Sidang Pemuda</option>
+                                    @foreach($daftarSidang as $sidang)
+                                        <option value="{{ $sidang->sidang }}">{{ $sidang->sidang }}</option>
+                                    @endforeach
                                 </select>
 
                                 @if ($errors->has('nama'))

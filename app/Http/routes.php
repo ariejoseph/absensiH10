@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
+	Route::get('jemaat/upload', 'JemaatController@upload')->name('upload');
 	Route::resource('jemaat', 'JemaatController');
 	Route::get('anak', 'JemaatController@index')->name('anak');
 	Route::get('remaja', 'JemaatController@index')->name('remaja');
@@ -52,6 +53,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::get('remaja/search/{keyword}', 'JemaatController@search')->name('searchRemaja');
 	Route::get('pemuda/search/{keyword}', 'JemaatController@search')->name('searchPemuda');
 	Route::get('jemaat/search/{keyword}', 'JemaatController@search')->name('search');
+	Route::get('anak/upload', 'JemaatController@upload')->name('uploadAnak');
+	Route::get('remaja/upload', 'JemaatController@upload')->name('uploadRemaja');
+	Route::get('pemuda/upload', 'JemaatController@upload')->name('uploadPemuda');
+	Route::post('uploadfile', 'JemaatController@populate');
 
 	Route::resource('kelompok', 'KelompokController');
 	Route::get('kelompok/create/{sidang}', 'KelompokController@create');
@@ -61,6 +66,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::post('/anggota/hapus/{id_kelompok}/{id_jemaat}', 'KelompokController@hapus');
 
 	Route::resource('sidang', 'SidangController');
+
+	Route::resource('daftarSidang', 'DaftarSidangController');
+	Route::resource('daftarPeran', 'DaftarPeranController');
 });
 
 Route::auth();

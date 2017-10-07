@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Requests;
 use App\Sidang;
+use App\DaftarSidang;
 use Auth;
 use Validator;
 
@@ -41,7 +42,8 @@ class SidangController extends Controller
      */
     public function create()
     {
-        return view('sidang.create');
+        $daftarSidang = DaftarSidang::all();
+        return view('sidang.create', compact('daftarSidang'));
     }
 
     /**

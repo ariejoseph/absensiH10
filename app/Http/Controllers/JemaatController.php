@@ -58,6 +58,20 @@ class JemaatController extends Controller
         }
     }
 
+    public function upload()
+    {
+        $routeName = Route::currentRouteName();
+        if($routeName == 'uploadAnak') {
+            return view('jemaat.anak.upload');
+        } else if($routeName == 'uploadRemaja') {
+            return view('jemaat.remaja.upload');
+        } else if($routeName == 'uploadPemuda') {
+            return view('jemaat.pemuda.upload');
+        } else {
+            return view('jemaat.upload');
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -139,6 +153,20 @@ class JemaatController extends Controller
                 return Redirect::to('jemaat');
             }
         }
+    }
+
+    public function populate(Request $request){
+        $file = $request->file('dataKaumSaleh');
+
+        //Display File Content
+        echo 'content: <br>';
+        $file2 = fopen($file->getRealPath(),"r");
+        while(! feof($file2))
+        {
+            echo fgets($file2). "<br />";
+        }
+        fclose($file2);
+        echo '<br>';
     }
 
     /**

@@ -19,6 +19,14 @@
                     <li class="{{ Request::segment(1) === 'jemaat' ? 'active' : null }}"><a href="/jemaat">Kaum Saleh</a></li>
                     <li class="{{ Request::segment(1) === 'sidang' ? 'active' : null }}"><a href="/sidang">Daftar Sidang</a></li>
                     <li class="{{ Request::segment(1) === 'kelompok' ? 'active' : null }}"><a href="/kelompok">Daftar Grup</a></li>
+                    <li class="{{ Request::segment(1) === 'daftar' ? 'active' : null }} dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pendaftaran
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/daftarSidang">Sidang</a></li>
+                            <li><a href="/daftarPeran">Peran</a></li>
+                        </ul>
+                    </li>
                 @endif
                     <li class="{{ Request::segment(1) === 'absensi' ? 'active' : null }}"><a href="/absensi">Absensi</a></li>
                     <li class="{{ Request::segment(1) === 'hadir' ? 'active' : null }}"><a href="/hadir">Laporan</a></li>

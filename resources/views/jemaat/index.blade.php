@@ -23,6 +23,7 @@
 	</div>
 	<div class="col-md-8 col-sm-6 col-xs-5">
 		<a class="btn btn-small btn-primary pull-right" href="{{ url('jemaat/create') }}"><i class="fa fa-plus"></i> Add Kaum Saleh</a>
+		<a class="btn btn-small btn-link pull-right" href="{{ url('jemaat/upload') }}"><i class="fa fa-upload"></i> Upload File</a>
 	</div>
 </div>
 @if(count($gereja))
